@@ -10,7 +10,7 @@ const app = express()
 const port = 4000
 
 app.use(cors({
-    origin: ["https://deluxe-tartufo-0034e3.netlify.app"],
+    origin: ["https://deluxe-tartufo-0034e3.netlify.app", "https://659ef3e8ea6f8a1d9622515e--deluxe-tartufo-0034e3.netlify.app"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
 }))
 app.use(bodyParser.json({ limit: '50mb' }));
