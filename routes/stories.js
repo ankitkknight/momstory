@@ -161,7 +161,7 @@ cloudinary.config({
 // }
 
 
-router.get('/savedstories', async (req, res) => {
+router.get('/savedstories', fetchUser, async (req, res) => {
     try {
         const stories = await Story.find({ user: req.user.id });
         res.json(stories);
@@ -170,7 +170,7 @@ router.get('/savedstories', async (req, res) => {
     }
 });
 
-router.post('/createstory', async (req, res) => {
+router.post('/createstory', fetchUser, async (req, res) => {
     try {
         const { title, description, rating } = req.body;
 
