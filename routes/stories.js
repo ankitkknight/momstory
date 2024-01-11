@@ -14,7 +14,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log(process.env.CLOUDINARY_CLOUD_NAME)
 
 // const generateAudio2 = async (id1) => {
 //     try {
@@ -162,7 +161,7 @@ console.log(process.env.CLOUDINARY_CLOUD_NAME)
 // }
 
 
-router.get('/savedstories', fetchUser, async (req, res) => {
+router.get('/savedstories', async (req, res) => {
     try {
         const stories = await Story.find({ user: req.user.id });
         res.json(stories);
@@ -171,7 +170,7 @@ router.get('/savedstories', fetchUser, async (req, res) => {
     }
 });
 
-router.post('/createstory', fetchUser, async (req, res) => {
+router.post('/createstory', async (req, res) => {
     try {
         const { title, description, rating } = req.body;
 

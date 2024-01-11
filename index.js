@@ -20,10 +20,6 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/stories', require('./routes/stories'))
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
 app.listen(port, () => {
     console.log(`Momstory backend listening on port ${port}`)
 })
