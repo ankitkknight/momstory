@@ -1,5 +1,7 @@
 var jwt = require('jsonwebtoken');
-const JWT_SECRET = "asdfghjkl;234567";
+require('dotenv').config();
+
+
 
 const fetchUser = (req, res, next) => {
     // get user from the jwt token add it to req object
@@ -9,7 +11,7 @@ const fetchUser = (req, res, next) => {
         res.status(401).send({ error: "Unauthorized access" })
     }
     try {
-        const data = jwt.verify(token, JWT_SECRET);
+        const data = jwt.verify(token, process.env.SECRET_KEY || "asdfghjkl;234567");
         consolo.log(data)
         req.user = data.user;
         next();
