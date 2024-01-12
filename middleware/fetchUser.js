@@ -13,10 +13,11 @@ const fetchUser = (req, res, next) => {
     }
     try {
         const data = jwt.verify(token, JWT_SECRET);
-        consolo.log(data)
+        console.log(data)
         req.user = data.user;
         next();
     } catch (error) {
+        console.log(error.message)
         res.status(401).send({ error: "Unauthorized access2" })
     }
 

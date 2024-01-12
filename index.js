@@ -4,13 +4,16 @@ var cors = require('cors');
 require('dotenv').config();
 const bodyParser = require("body-parser");
 
+var cookieParser = require('cookie-parser');
+
 connectToMongo();
 
 const app = express()
 const port = 4000
 
+app.use(cookieParser());
 app.use(cors({
-    origin: ["https://659efb1e69d5b51d64426bb5--deluxe-tartufo-0034e3.netlify.app"],
+    origin: ["https://659efb1e69d5b51d64426bb5--deluxe-tartufo-0034e3.netlify.app", "*"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
 }))
 app.use(bodyParser.json({ limit: '50mb' }));
