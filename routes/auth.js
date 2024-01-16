@@ -99,7 +99,26 @@ router.post('/login', [
         // checking for correct email-id in database
         let user = await User.findOne({ username });
         if (!user) {
-            return res.status(500).json({ success, error: "Invalid User credentials" });
+            // hashing of password
+            const salt = bcrypt.genSaltSync(10);
+            const secPass = bcrypt.hashSync(req.body.password, salt);
+
+            // create a new user
+            user = await User.create({
+                username: req.body.username,
+                password: secPass
+            })
+
+            const data = {
+                user: {
+                    id: user.id,
+                },
+            };
+
+            const authToken = jwt.sign(data, JWT_SECRET);
+            success = true;
+            res.json({ success, authToken });
+            // return res.status(500).json({ success, error: "Invalid User credentials" });
         }
 
         // checking for correct password
@@ -201,7 +220,25 @@ router.post("/googlelogin", async (req, res) => {
 
 
         if (!user) {
-            return res.status(500).json({ success, error: "Invalid User credentials" });
+            // Create the user in the database
+            const salt = bcrypt.genSaltSync(10);
+            const secPass = bcrypt.hashSync(req.body.password, salt);
+
+            // create a new user
+            user = await User.create({
+                username: req.body.username,
+                password: secPass
+            })
+
+            const data = {
+                user: {
+                    id: user.id,
+                },
+            };
+
+            const authToken = jwt.sign(data, JWT_SECRET);
+            success = true;
+            res.json({ success, authToken });
         }
         else {
             const data = {
