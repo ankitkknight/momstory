@@ -13,7 +13,7 @@ const port = 4000
 
 app.use(cookieParser());
 app.use(cors({
-    origin: ["https://659efb1e69d5b51d64426bb5--deluxe-tartufo-0034e3.netlify.app", "*"],
+    origin: ["https://65a6ff183edb872f12282fb9--deluxe-tartufo-0034e3.netlify.app", "*"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
 }))
 app.use(bodyParser.json({ limit: '50mb' }));
