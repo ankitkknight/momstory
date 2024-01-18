@@ -202,9 +202,7 @@ router.post('/createstory', fetchUser, async (req, res) => {
                     image: imageCloudinaryResponse ? imageCloudinaryResponse.secure_url : null,
                     voice: item.text,
                     text: item.text,
-                    // Add other properties as needed
                 };
-                // console.log(processedItem);
                 processedDescriptions.push(processedItem);
             } catch (uploadError) {
                 return res.status(500).send("Upload failed");
@@ -221,6 +219,7 @@ router.post('/createstory', fetchUser, async (req, res) => {
 
         const savedStory = await story.save();
         res.json(savedStory);
+        console.log(savedStory)
         console.log("story saved")
 
     } catch (error) {
