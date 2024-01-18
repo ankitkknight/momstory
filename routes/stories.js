@@ -221,6 +221,7 @@ router.post('/createstory', fetchUser, async (req, res) => {
 
         const savedStory = await story.save();
         res.json(savedStory);
+        console.log("story saved")
 
     } catch (error) {
         res.status(500).send("Internal error has occurred");
