@@ -248,8 +248,6 @@ router.post("/googlelogin", async (req, res) => {
             };
 
             const authToken = jwt.sign(data, JWT_SECRET);
-            // console.log(authToken)
-            // console.log(data)
             success = true;
             res.json({ success, authToken });
         }
@@ -262,10 +260,13 @@ router.post("/googlelogin", async (req, res) => {
 
 router.post("/facebooklogin", async (req, res) => {
     var success = false;
+    console.log("facebook");
+    console.log(req.body);
     try {
         let user = await User.findOne({ username: req.body.username });
         if (!user) {
             const salt = bcrypt.genSaltSync(10);
+            console.log(salt);
             const secPass = bcrypt.hashSync(req.body.password, salt);
             user = await user.create({
                 username: req.body.username,
@@ -282,7 +283,7 @@ router.post("/facebooklogin", async (req, res) => {
             success = true;
             console.log(authToken);
             console.log(data);
-            console.log("facebook");
+
             res.json({ success, authToken });
 
         }
