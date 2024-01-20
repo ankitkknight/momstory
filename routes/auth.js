@@ -248,8 +248,8 @@ router.post("/googlelogin", async (req, res) => {
             };
 
             const authToken = jwt.sign(data, JWT_SECRET);
-            console.log(authToken)
-            console.log(data)
+            // console.log(authToken)
+            // console.log(data)
             success = true;
             res.json({ success, authToken });
         }
@@ -259,6 +259,39 @@ router.post("/googlelogin", async (req, res) => {
         });
     }
 });
+
+router.post("/facebooklogin", async (req, res) => {
+    var success = false;
+    try {
+        let user = await User.findOne({ username: req.body.username });
+        if (!user) {
+            const salt = bcrypt.genSaltSync(10);
+            const secPass = bcrypt.hashSync(req.body.password, salt);
+            user = await user.create({
+                username: req.body.username,
+                password: secPass
+            });
+
+            const data = {
+                user: {
+                    id: user.id,
+                },
+            };
+
+            const authToken = jwt.sign(data, JWT_SECRET);
+            success = true;
+            console.log(authToken);
+            console.log(data);
+            console.log("facebook");
+            res.json({ success, authToken });
+
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error?.message || error,
+        });
+    }
+})
 
 
 module.exports = router;
