@@ -287,6 +287,17 @@ router.post("/facebooklogin", async (req, res) => {
             res.json({ success, authToken });
 
         }
+        else {
+            const data = {
+                user: {
+                    id: user.id,
+                },
+            };
+
+            const authToken = jwt.sign(data, JWT_SECRET);
+            success = true;
+            res.json({ success, authToken });
+        }
     } catch (error) {
         res.status(500).json({
             message: error?.message || error,
