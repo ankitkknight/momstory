@@ -170,6 +170,21 @@ router.get('/savedstories', fetchUser, async (req, res) => {
     }
 });
 
+router.get('/sharedstory/:id', async (req, res) => {
+    try {
+        const story = await Story.findById(req.params.id);
+        if (story) {
+            return res.json({ story });
+        }
+        else {
+            res.status(404).send("Not found");
+        }
+    }
+    catch (error) {
+        res.status(500).send("Internal error has occurred");
+    }
+});
+
 router.post('/createstory', fetchUser, async (req, res) => {
     try {
         const { title, description, rating } = req.body;
@@ -219,8 +234,6 @@ router.post('/createstory', fetchUser, async (req, res) => {
 
         const savedStory = await story.save();
         res.json(savedStory);
-        console.log(savedStory)
-        console.log("story saved")
 
     } catch (error) {
         res.status(500).send("Internal error has occurred");
