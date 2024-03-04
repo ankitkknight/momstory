@@ -13,7 +13,7 @@ const port = 4000
 
 app.use(cookieParser());
 app.use(cors({
-    origin: ["https://bright-platypus-5efaa3.netlify.app", "http://localhost:3000"],
+    origin: ["https://bright-platypus-5efaa3.netlify.app", "http://localhost:3000", "https://benevolent-dragon-a20dca.netlify.app"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
 }))
 app.use(bodyParser.json({ limit: '50mb' }));
