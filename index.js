@@ -13,7 +13,7 @@ const port = 4000
 
 app.use(cookieParser());
 app.use(cors({
-    origin: ["https://resonant-beijinho-90e6ba.netlify.app"],
+    origin: ["https://heartfelt-kleicha-c8a312.netlify.app"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
 }))
 app.use(bodyParser.json({ limit: '50mb' }));
